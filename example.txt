@@ -1,0 +1,15 @@
+The following is an example script for the language
+
+:prestart
+
+!script_version 1
+!vram.size 3072
+!ram.size 4096
+!display.mode text
+!display.size 40, 30
+!display.title "Hello World!"
+!display.colors !blue, !cyan
+    
+
+:startup
+

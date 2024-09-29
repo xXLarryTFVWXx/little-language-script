@@ -1,0 +1,59 @@
+Little Language script (lls)
+
+The coder is limited to a certain amount of ram
+
+Interpreter instructions are denoted with the exclamation point (!)
+Some of these are only avaliable in certain labels (explained below)
+
+i.e. !display
+    any sub options will change/query the current display mode.
+    i.e. !display.mode [text|graphic]
+    !display.size [rows, columns | width height]
+    !display.refresh_rate (fps)
+        Automatically refreshes the screen with the current contents of the vram variable by 1/refresh_rate seconds (minimum 0.002 seconds)
+
+
+i.e. !echo [on|off] (Must be put in startup label, only if display mode is text)
+    If blank, will print ECHO is on|off
+    Otherwise, if a valid option, will change to that option
+
+
+Registers are defined by the at symbol (@)
+
+
+@result: the value returned from the label, destroyed upon a jump and overwritten on a return
+@acc: The accumulator, adds one every tick.
+@
+
+
+These are limited by !address_size and !data_space
+
+@vram: Is what will be displayed on the screen
+@wram: working ram, where the data for the current session is saved
+@sram: save ram is where data is saved between sessions (saved to an alternate data stream attached to the originating script)
+
+here are some read-only registers
+
+@rom: This is where the entire code is stored, also limited by the !address_size and !data_space
+@params: parameters given to the label, are destroyed/modified upon a jump or return
+@addr: the address of the label in the rom
+
+
+labels are declared with the colon (:)
+functions are the same as labels, just poll @params
+
+comments are opened and closed with a backtick (`)
+
+Variables are declared by the dollarsign ($)
+
+# Important! There is no scoping, so if you need to make a local copy, it is recommended to add the label/function name as a prefix to the variable name #
+
+Here are some default variables:
+
+$column_count (2-bytes): the width of the display/window
+$row_count (2-bytes): The height of the display/window
+
+
+
+
+May potentially be compiled for use on custom hardware.
